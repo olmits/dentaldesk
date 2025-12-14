@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TreatmentPageHeader from "./components/TreatmentPageHeader";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
       >
         <div className="container mx-auto flex flex-col gap-6 py-10">
           <TreatmentPageHeader />
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </div>
       </body>
     </html>
