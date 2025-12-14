@@ -13,6 +13,17 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // Custom rules
+  {
+    rules: {
+      "semi": "error",
+      "indent": ["error", 2, { "SwitchCase": 1 }],
+      "object-curly-spacing": ["error", "always"],
+      "no-debugger": "error",
+      "no-console": ["error", { "allow": ["warn", "error"] }],
+      "no-constant-condition": "error",
+    },
+  },
 ]);
 
 export default eslintConfig;

@@ -2,16 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -20,14 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -39,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type { Treatment, TreatmentStatus } from "@/lib/types";
+import TreatmentCard from "./componets/TreatmentCard";
 
 const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
   [
@@ -96,14 +80,7 @@ export default function TreatmentsPage() {
   }, [search, status, treatments]);
 
   return (
-    <div className="container mx-auto flex flex-col gap-6 py-10">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">DentalDesk</h1>
-        <p className="text-sm text-muted-foreground">
-          Track dental treatments and their status.
-        </p>
-      </header>
-
+    <>
       <section className="flex flex-col gap-4 rounded-lg border bg-card/40 p-4">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
@@ -195,64 +172,10 @@ export default function TreatmentsPage() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((treatment, index) => (
-            <Card key={index} className="shadow-sm">
-              <CardHeader>
-                <CardTitle>{treatment.patient}</CardTitle>
-                <CardDescription>{treatment.procedure}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <div className="text-xs text-muted-foreground">Dentist</div>
-                  <div className="text-sm font-medium">{treatment.dentist}</div>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Date</div>
-                  <div className="text-sm font-medium">{treatment.date}</div>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Status</div>
-                  <Badge className="mt-1 bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-200">
-                    {treatment.status}
-                  </Badge>
-                </div>
-                {treatment.notes ? (
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {treatment.notes}
-                  </p>
-                ) : null}
-              </CardContent>
-              <CardFooter>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      Update status
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>Status</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuCheckboxItem
-                      checked={treatment.status === "scheduled"}
-                    >
-                      Scheduled
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem
-                      checked={treatment.status === "in_progress"}
-                    >
-                      In Progress
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem
-                      checked={treatment.status === "completed"}
-                    >
-                      Completed
-                    </DropdownMenuCheckboxItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </CardFooter>
-            </Card>
+            <TreatmentCard key={index} treatment={treatment} />
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -49,16 +49,16 @@ export async function GET(request: Request) {
 
       const filtered = search
         ? filteredByStatus.filter((item) => {
-            const patient = item.patient.toLowerCase();
-            const procedure = item.procedure.toLowerCase();
-            const dentist = item.dentist.toLowerCase();
+          const patient = item.patient.toLowerCase();
+          const procedure = item.procedure.toLowerCase();
+          const dentist = item.dentist.toLowerCase();
 
-            return (
-              patient.includes(search) ||
+          return (
+            patient.includes(search) ||
               procedure.includes(search) ||
               dentist.includes(search)
-            );
-          })
+          );
+        })
         : filteredByStatus;
 
       const total = filtered.length;

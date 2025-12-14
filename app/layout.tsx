@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import TreatmentPageHeader from "./componets/TreatmentPageHeader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="container mx-auto flex flex-col gap-6 py-10">
+          <TreatmentPageHeader />
+          {children}
+        </div>
       </body>
     </html>
   );
