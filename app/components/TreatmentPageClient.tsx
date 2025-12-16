@@ -4,35 +4,44 @@ import { useEffect, useState } from "react";
 
 import type { Treatment, TreatmentStatus } from "@/lib/types";
 
-import TreatmentCard from "./TreatmentCard";
 import AddTreatment from "./AddTreatment";
 import SearchTreatment from "./SearchTreatment";
 import FilterTreatment from "./FilterTreatment";
+import TreatmentsCount from "./TreatmentsCount";
+import TreatmentsList from "./TreatmentsList";
 
 
-export default function TreatmentsPage() {
+export default function TreatmentsPageClient() {
   const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [filtered, setFiltered] = useState<Treatment[]>([]);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<TreatmentStatus | "all">("all");
-  const [isLoading, setIsLoading] = useState(false);
-  const [total, setTotal] = useState(0);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [total, setTotal] = useState(0);
 
-  useEffect(() => {
-    async function load() {
-      setIsLoading(true);
-      const response = await fetch("/api/treatments");
-      const data = await response.json();
-      const items = data.data ?? [];
+  // useEffect(() => {
+  //   async function load() {
+  //     setIsLoading(true);
+  //     try {
+  //       const data = await treatmentService.getTreatments();
+  //       const items = data.data;
 
-      setTreatments(items);
-      setFiltered(items);
-      setTotal(items.length);
-      setIsLoading(false);
-    }
+  //       setTreatments(items);
+  //       setFiltered(items);
+  //       setTotal(items.length);
+  //     } catch (error) {
+  //       console.error("Failed to load treatments:", error);
+  //       // Handle error state if needed
+  //       setTreatments([]);
+  //       setFiltered([]);
+  //       setTotal(0);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
 
-    load();
-  }, []);
+  //   load();
+  // }, []);
 
   useEffect(() => {
     let next = [...treatments];
@@ -68,22 +77,10 @@ export default function TreatmentsPage() {
           <AddTreatment />
         </div>
 
-        <div className="text-sm text-muted-foreground">
-          Showing {filtered.length} of {total} treatments
-        </div>
+        <TreatmentsCount />
       </section>
 
-      {isLoading ? (
-        <div className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
-          Loading treatments...
-        </div>
-      ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((treatment, index) => (
-            <TreatmentCard key={index} treatment={treatment} />
-          ))}
-        </div>
-      )}
+      <TreatmentsList />
     </>
   );
 }
