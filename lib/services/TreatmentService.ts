@@ -22,7 +22,7 @@ class TreatmentService {
     this.baseUrl = baseUrl;
   }
 
-  async getTreatments(params: GetTreatmentsParams = {}): Promise<GetTreatmentsResponse> {
+  async getTreatments(params: GetTreatmentsParams = {}, signal?: AbortSignal): Promise<GetTreatmentsResponse> {
     const { search, status, page, pageSize } = params;
     
     const queryParams = new URLSearchParams();
@@ -51,6 +51,7 @@ class TreatmentService {
         headers: {
           "Content-Type": "application/json",
         },
+        signal,
       });
       
       if (!response.ok) {

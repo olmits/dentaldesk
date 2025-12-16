@@ -6,12 +6,6 @@ import { Input } from "@/components/ui/input";
 import { useSearchStateContext } from "@/context/SearchProvider";
 import { useSearchStateAction } from "@/hooks/useSearchStateAction";
 
-// interface SearchTreatmentProps {
-//   search: string;
-//   onSearchChange: (value: string) => void;
-//   debounceMs?: number;
-// }
-
 export default function TreatmentsSearch() {
   const { search } = useSearchStateContext();
   const { setSearch } = useSearchStateAction();
@@ -19,7 +13,6 @@ export default function TreatmentsSearch() {
   const [inputValue, setInputValue] = useState("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Update input value when search prop changes (for external updates)
   useEffect(() => {
     setInputValue(search);
   }, [search]);
@@ -28,18 +21,15 @@ export default function TreatmentsSearch() {
     const value = event.target.value;
     setInputValue(value);
 
-    // Clear existing timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    // Set new timeout for debounced search
     timeoutRef.current = setTimeout(() => {
       setSearch(value);
-    }, 500);
+    }, 200);
   };
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {

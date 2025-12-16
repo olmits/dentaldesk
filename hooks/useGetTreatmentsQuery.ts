@@ -14,7 +14,7 @@ const useGetTreatmentsQuery = () => {
 
   return useQuery({
     queryKey: [TREATMENTS, GET_TREATMENTS, queryKey],
-    queryFn: () => treatmentService.getTreatments({ search, status }),
+    queryFn: ({ signal }) => treatmentService.getTreatments({ search, status }, signal),
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     retry: 3,
   });
