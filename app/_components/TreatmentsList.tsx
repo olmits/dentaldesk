@@ -2,7 +2,7 @@ import useGetTreatmentsQuery from "@/hooks/useGetTreatmentsQuery";
 import TreatmentCard from "./TreatmentCard";
 
 
-const TreatmentsList = () => {
+export default function TreatmentsList() {
   const { data, isLoading } = useGetTreatmentsQuery();
 
   if (isLoading) {
@@ -17,5 +17,3 @@ const TreatmentsList = () => {
     </div>
   );
 };
-
-export default TreatmentsList;

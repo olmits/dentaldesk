@@ -51,8 +51,6 @@ class TreatmentService {
         headers: {
           "Content-Type": "application/json",
         },
-        // Disable caching for fresh data
-        cache: "no-store",
       });
       
       if (!response.ok) {

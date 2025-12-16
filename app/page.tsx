@@ -1,12 +1,13 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import TreatmentPageClient from "./components/TreatmentPageClient";
-// import { getQueryClient } from "@/lib/queryClientUtils";
+
 import { GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryKeys";
 import { treatmentService } from "@/lib/services/TreatmentService";
+import { SearchProvider } from "@/context/SearchProvider";
+
+import TreatmentPageClient from "./_components/TreatmentPageClient";
 
 export default function TreatmentPage() {
   const queryClient = new QueryClient();
-  // const queryClient = getQueryClient();
 
   queryClient.prefetchQuery({
     queryKey: [TREATMENTS, GET_TREATMENTS],
@@ -17,7 +18,9 @@ export default function TreatmentPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <TreatmentPageClient />
+      <SearchProvider>
+        <TreatmentPageClient />
+      </SearchProvider>
     </HydrationBoundary>
   );
 }

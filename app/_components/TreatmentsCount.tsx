@@ -7,10 +7,16 @@ const TreatmentsCount = () => {
   if (isLoading) {
     return <Skeleton className="h-4 w-48" />;
   }
+
+  if (!data || data.total === 0) {
+    return (
+      <div className="text-sm text-muted-foreground">No treatments found</div>
+    );
+  }
     
   return (
     <div className="text-sm text-muted-foreground">
-        Showing {data?.pageSize || 0} of {data?.total || 0} treatments
+        Showing {Math.min(data.pageSize, data.total)} of {data.total || 0} treatments
     </div>
   );
 };

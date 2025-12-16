@@ -2,19 +2,20 @@
 import React, { useRef, useState, useEffect } from "react";
 
 import { Input } from "@/components/ui/input";
+import { useSearchStateContext } from "@/context/SearchProvider";
+import { useSearchStateAction } from "@/hooks/useSearchStateAction";
 
-interface SearchTreatmentProps {
-  search: string;
-  onSearchChange: (value: string) => void;
-  debounceMs?: number;
-}
+// interface SearchTreatmentProps {
+//   search: string;
+//   onSearchChange: (value: string) => void;
+//   debounceMs?: number;
+// }
 
-export default function SearchTreatment({ 
-  search, 
-  onSearchChange, 
-  debounceMs = 300 
-}: SearchTreatmentProps) {
-  const [inputValue, setInputValue] = useState(search);
+export default function SearchTreatment() {
+  const { search } = useSearchStateContext();
+  const { setSearch } = useSearchStateAction();
+
+  const [inputValue, setInputValue] = useState("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Update input value when search prop changes (for external updates)
@@ -33,8 +34,8 @@ export default function SearchTreatment({
 
     // Set new timeout for debounced search
     timeoutRef.current = setTimeout(() => {
-      onSearchChange(value);
-    }, debounceMs);
+      setSearch(value);
+    }, 500);
   };
 
   // Cleanup timeout on unmount
