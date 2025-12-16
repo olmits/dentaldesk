@@ -1,7 +1,7 @@
 import { useSearchDispatchContext } from "@/context/SearchProvider";
 import { SEARCH_ACTIONS } from "@/lib/context/searchReducer";
 
-export function useSearchStateAction() {
+export const useSearchStateAction = () => {
   const dispatch = useSearchDispatchContext();
 
   const setSearch = (search: string) => {
@@ -16,4 +16,4 @@ export function useSearchStateAction() {
     setSearch,
     clearSearch,
   };
-}
+};

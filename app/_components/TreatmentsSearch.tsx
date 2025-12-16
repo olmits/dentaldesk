@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useRef, useState, useEffect } from "react";
 
 import { Input } from "@/components/ui/input";
@@ -11,7 +12,7 @@ import { useSearchStateAction } from "@/hooks/useSearchStateAction";
 //   debounceMs?: number;
 // }
 
-export default function SearchTreatment() {
+export default function TreatmentsSearch() {
   const { search } = useSearchStateContext();
   const { setSearch } = useSearchStateAction();
 

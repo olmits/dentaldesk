@@ -1,11 +1,12 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 import type { Treatment, TreatmentStatus } from "@/lib/types";
 
 import AddTreatment from "./AddTreatment";
 import TreatmentsSearch from "./TreatmentsSearch";
-import FilterTreatment from "./FilterTreatment";
+import TreatmentsFilter from "./TreatmentsFilter";
 import TreatmentsCount from "./TreatmentsCount";
 import TreatmentsList from "./TreatmentsList";
 
@@ -70,7 +71,7 @@ export default function TreatmentsPageClient() {
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
             <TreatmentsSearch />
-            <FilterTreatment status={status} onChangeStatus={setStatus} />
+            <TreatmentsFilter />
           </div>
 
           <AddTreatment />

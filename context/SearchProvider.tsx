@@ -29,19 +29,19 @@ export function SearchProvider({ defaultSearch = "", children }: SearchProviderP
   );
 }
 
-export function useSearchStateContext() {
+export const useSearchStateContext = () => {
   const context = useContext(SearchStateContext);
   if (!context) {
     throw new Error("useSearchStateContext must be used within a SearchProvider");
   }
   return context;
-}
+};
 
 // Hook to use search dispatch
-export function useSearchDispatchContext() {
+export const useSearchDispatchContext = () => {
   const context = useContext(SearchDispatchContext);
   if (!context) {
     throw new Error("useSearchDispatchContext must be used within a SearchProvider");
   }
   return context;
-}
+};

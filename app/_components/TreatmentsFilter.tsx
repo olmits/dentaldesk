@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Select,
   SelectContent,
@@ -6,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useFilterStateContext } from "@/context/FilterProvider";
+import { useFilterStateAction } from "@/hooks/useFilterStateAction";
 import { TreatmentStatus } from "@/lib/types";
 
 const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
@@ -17,17 +20,15 @@ const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
     { label: "Cancelled", value: "cancelled" },
   ];
 
-interface FilterTreatmentProps {
-  status: TreatmentStatus | "all";
-  onChangeStatus: (status: TreatmentStatus | "all") => void;
-}
+export default function TreatmentsFilter() {
+  const { status } = useFilterStateContext();
+  const { setStatus } = useFilterStateAction();
 
-export default function FilterTreatment({ status, onChangeStatus }: FilterTreatmentProps) {
   return (
     <Select
       value={status}
       onValueChange={(value) =>
-        onChangeStatus(value as TreatmentStatus | "all")
+        setStatus(value as TreatmentStatus | "all")
       }
     >
       <SelectTrigger className="md:w-[220px]">

@@ -1,4 +1,3 @@
-// Action type constants
 export const SEARCH_ACTIONS = {
   SET_SEARCH: 'SET_SEARCH',
   CLEAR_SEARCH: 'CLEAR_SEARCH',

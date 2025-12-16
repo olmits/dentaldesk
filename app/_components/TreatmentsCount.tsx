@@ -1,7 +1,9 @@
+"use client";
+
 import useGetTreatmentsQuery from "@/hooks/useGetTreatmentsQuery";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const TreatmentsCount = () => {
+export default function TreatmentsCount() {
   const { data, isLoading } = useGetTreatmentsQuery();
 
   if (isLoading) {
@@ -20,5 +22,3 @@ const TreatmentsCount = () => {
     </div>
   );
 };
-
-export default TreatmentsCount;
