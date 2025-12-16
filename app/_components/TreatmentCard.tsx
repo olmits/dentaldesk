@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Treatment } from "@/lib/types";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,9 +16,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Treatment } from "@/lib/types";
 
 interface TreatmentCardProps {
     treatment: Treatment
+}
+
+export function TreatmentCardSkeleton() {
+  return (
+    <div className="flex flex-col gap-6 rounded-lg border bg-card p-6 space-y-3">
+      <div className="flex flex-col gap-2 items-left">
+        <Skeleton className="h-4 w-32" />
+        <Skeleton className="h-5 w-20" />
+      </div>
+      <div className="space-y-3">
+        <Skeleton className="h-9 w-36" />
+        <Skeleton className="h-9 w-32" />
+        <Skeleton className="h-10 w-1/2" />
+        <Skeleton className="h-5 w-3/4" />
+      </div>
+      <div className="flex">
+        <Skeleton className="h-8 w-32" />
+      </div>
+    </div>
+  );
 }
 
 export default function TreatmentCard({ treatment }: TreatmentCardProps) {
@@ -44,36 +65,30 @@ export default function TreatmentCard({ treatment }: TreatmentCardProps) {
             {treatment.status}
           </Badge>
         </div>
-        {treatment.notes ? (
+        {treatment.notes && (
           <p className="text-sm leading-relaxed text-muted-foreground">
             {treatment.notes}
           </p>
-        ) : null}
+        )}
       </CardContent>
       <CardFooter>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm">
-                    Update status
+              Update status
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Status</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem
-              checked={treatment.status === "scheduled"}
-            >
-                    Scheduled
+            <DropdownMenuCheckboxItem checked={treatment.status === "scheduled"}>
+              Scheduled
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              checked={treatment.status === "in_progress"}
-            >
-                    In Progress
+            <DropdownMenuCheckboxItem checked={treatment.status === "in_progress"}>
+              In Progress
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              checked={treatment.status === "completed"}
-            >
-                    Completed
+            <DropdownMenuCheckboxItem checked={treatment.status === "completed"}>
+              Completed
             </DropdownMenuCheckboxItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,6 +1,6 @@
 "use client";
 
-import AddTreatment from "./AddTreatment";
+import AddTreatment from "./AddTreatment/AddTreatment";
 import TreatmentsSearch from "./TreatmentsSearch";
 import TreatmentsFilter from "./TreatmentsFilter";
 import TreatmentsCount from "./TreatmentsCount";
