@@ -31,12 +31,12 @@ export default function TreatmentsFilter() {
         setStatus(value as TreatmentStatus | "all")
       }
     >
-      <SelectTrigger className="md:w-[220px]">
+      <SelectTrigger className="md:w-[220px] cursor-pointer">
         <SelectValue placeholder="Filter by status" />
       </SelectTrigger>
       <SelectContent>
         {STATUS_OPTIONS.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
+          <SelectItem className="cursor-pointer" key={option.value} value={option.value}>
             {option.label}
           </SelectItem>
         ))}

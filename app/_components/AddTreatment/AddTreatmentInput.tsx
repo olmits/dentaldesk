@@ -1,25 +1,50 @@
 import { useFormContext } from "react-hook-form";
-import { HTMLInputTypeAttribute } from "react";
+import { ComponentProps } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TreatmentFormField } from "@/lib/types";
+import { TreatmentFormData, TreatmentFormFieldEnum } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-interface AddTreatmentInputProps {
-    id: string;
-    name: TreatmentFormField;
+interface AddTreatmentInputProps extends Omit<ComponentProps<"input">, "name" | "value" | "onChange"> {
+    name: TreatmentFormFieldEnum;
     label: string;
-    placeholder?: string;
-    type?: HTMLInputTypeAttribute;
-}
+};
 
-export default function AddTreatmentInput({ id, name, placeholder, label, type = "text" }: AddTreatmentInputProps) {
-  const { register } = useFormContext();
+export default function AddTreatmentInput({ id, name, label, type = "text", className, ...rest }: AddTreatmentInputProps) {
+  const { 
+    register, 
+    formState: { errors } 
+  } = useFormContext<TreatmentFormData>();
+
+  const error = errors[name];
+  const hasError = !!error;
 
   return (
     <div className="grid gap-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Input id={id} placeholder={placeholder} type={type} {...register(name)} />
+      <Label 
+        htmlFor={id}
+        className={cn(
+          hasError && "text-destructive"
+        )}
+      >
+        {label}
+      </Label>
+      <Input 
+        id={id} 
+        type={type} 
+        className={cn(
+          hasError && "border-destructive focus-visible:ring-destructive",
+          className
+        )}
+        {...rest} 
+        {...register(name)} 
+      />
+      {hasError && (
+        <p className="text-sm text-destructive">
+          {error.message}
+        </p>
+      )}
     </div>
   );
 }

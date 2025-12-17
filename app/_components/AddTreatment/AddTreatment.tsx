@@ -7,25 +7,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { TREATMENT_FORM_ID } from "@/lib/constants/form";
+import useAddTreatmentMutation from "@/hooks/useAddTreatmentMutation";
 
 import AddTreatmentForm from "./AddTreatmentForm";
-import { TREATMENT_FORM_ID } from "@/lib/constants/form";
 
 export default function AddTreatment() {
+  const { mutate, isPending } = useAddTreatmentMutation();
+
   return (
-    <Dialog>
+    <Dialog >
       <DialogTrigger asChild>
-        <Button>Add treatment</Button>
+        <Button className="cursor-pointer">Add treatment</Button>
       </DialogTrigger>
       <DialogContent aria-description="Add a new treatment form">
         <DialogHeader>
           <DialogTitle>Add treatment</DialogTitle>
         </DialogHeader>
 
-        <AddTreatmentForm />
+        <AddTreatmentForm onSubmit={mutate} isLoading={isPending} />
 
         <DialogFooter>
-          <Button form={TREATMENT_FORM_ID} type="submit">Save treatment</Button>
+          <Button form={TREATMENT_FORM_ID} type="submit" className="cursor-pointer" disabled={isPending}>Save treatment</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

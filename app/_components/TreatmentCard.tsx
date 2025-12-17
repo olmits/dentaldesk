@@ -74,7 +74,7 @@ export default function TreatmentCard({ treatment }: TreatmentCardProps) {
       <CardFooter>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
+            <Button className="cursor-pointer" variant="outline" size="sm">
               Update status
             </Button>
           </DropdownMenuTrigger>

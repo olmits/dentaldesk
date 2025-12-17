@@ -1,19 +1,5 @@
-import type { Treatment, TreatmentStatus } from "@/lib/types";
-
-export interface GetTreatmentsParams {
-  search?: string;
-  status?: TreatmentStatus | "all";
-  page?: number;
-  pageSize?: number;
-}
-
-export interface GetTreatmentsResponse {
-  data: Treatment[];
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}
+import type { Treatment } from "@/lib/types";
+import { GetTreatmentsParams, GetTreatmentsResponse, AddTreatmentParams } from "./TreatmentService.types";
 
 class TreatmentService {
   private baseUrl: string;
@@ -73,6 +59,32 @@ class TreatmentService {
         error instanceof Error 
           ? `Failed to fetch treatments: ${error.message}`
           : "Failed to fetch treatments"
+      );
+    }
+  }
+
+  async addTreatment(treatmentData: AddTreatmentParams): Promise<Treatment> {
+    try {
+      const response = await fetch(`${this.baseUrl}/treatments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(treatmentData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json() as Treatment;
+      return data;
+    } catch (error) {
+      console.error("Error adding treatment:", error);
+      throw new Error(
+        error instanceof Error 
+          ? `Failed to add treatment: ${error.message}`
+          : "Failed to add treatment"
       );
     }
   }
