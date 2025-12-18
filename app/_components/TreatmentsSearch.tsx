@@ -5,10 +5,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { useSearchStateContext } from "@/context/SearchProvider";
 import { useSearchStateAction } from "@/hooks/useSearchStateAction";
+import { usePaginationStateAction } from "@/hooks/usePaginationStateAction";
 
 export default function TreatmentsSearch() {
   const { search } = useSearchStateContext();
   const { setSearch } = useSearchStateAction();
+  const { resetPagination } = usePaginationStateAction();
 
   const [inputValue, setInputValue] = useState("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -27,6 +29,7 @@ export default function TreatmentsSearch() {
 
     timeoutRef.current = setTimeout(() => {
       setSearch(value);
+      resetPagination();
     }, 200);
   };
 

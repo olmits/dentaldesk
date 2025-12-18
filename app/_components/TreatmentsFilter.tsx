@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { useFilterStateContext } from "@/context/FilterProvider";
 import { useFilterStateAction } from "@/hooks/useFilterStateAction";
+import { usePaginationStateAction } from "@/hooks/usePaginationStateAction";
 import { TreatmentStatus } from "@/lib/types";
 
 const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
@@ -23,13 +24,15 @@ const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
 export default function TreatmentsFilter() {
   const { status } = useFilterStateContext();
   const { setStatus } = useFilterStateAction();
+  const { resetPagination } = usePaginationStateAction();
 
   return (
     <Select
       value={status}
-      onValueChange={(value) =>
-        setStatus(value as TreatmentStatus | "all")
-      }
+      onValueChange={(value) => {
+        setStatus(value as TreatmentStatus | "all");
+        resetPagination();
+      }}
     >
       <SelectTrigger className="md:w-[220px] cursor-pointer">
         <SelectValue placeholder="Filter by status" />

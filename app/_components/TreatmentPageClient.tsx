@@ -5,6 +5,7 @@ import TreatmentsSearch from "./TreatmentsSearch";
 import TreatmentsFilter from "./TreatmentsFilter";
 import TreatmentsCount from "./TreatmentsCount";
 import TreatmentsList from "./TreatmentsList";
+import TreatmentPagination from "./TreatmentsPagination";
 
 
 export default function TreatmentsPageClient() {
@@ -21,6 +22,7 @@ export default function TreatmentsPageClient() {
         <TreatmentsCount />
       </section>
       <TreatmentsList />
+      <TreatmentPagination />
     </>
   );
 }

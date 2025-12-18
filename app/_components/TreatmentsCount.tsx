@@ -18,7 +18,7 @@ export default function TreatmentsCount() {
     
   return (
     <div className="text-sm text-muted-foreground">
-        Showing {Math.min(data.pageSize, data.total)} of {data.total || 0} treatments
+        Showing {Math.min(data.pageSize, data.total)} of {data.total} treatments
     </div>
   );
 };
