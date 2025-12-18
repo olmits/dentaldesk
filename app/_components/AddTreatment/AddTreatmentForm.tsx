@@ -14,7 +14,7 @@ interface AddTreatmentFormProps {
 
 export default function AddTreatmentForm({ isLoading = false, onSubmit }: AddTreatmentFormProps) {
   const form = useForm<TreatmentFormData>({
-    mode: "all",
+    mode: "onSubmit",
     reValidateMode: "onChange",
     resolver: zodResolver(treatmentFormSchema),
   });

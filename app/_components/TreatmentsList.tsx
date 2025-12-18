@@ -1,4 +1,5 @@
 import useGetTreatmentsQuery from "@/hooks/useGetTreatmentsQuery";
+
 import TreatmentCard, { TreatmentCardSkeleton } from "./TreatmentCard";
 
 

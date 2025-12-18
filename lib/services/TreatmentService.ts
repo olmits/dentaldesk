@@ -1,4 +1,4 @@
-import type { Treatment } from "@/lib/types";
+import type { Treatment, TreatmentStatus } from "@/lib/types";
 import { GetTreatmentsParams, GetTreatmentsResponse, AddTreatmentParams } from "./TreatmentService.types";
 
 class TreatmentService {
@@ -28,8 +28,10 @@ class TreatmentService {
     if (pageSize && pageSize > 0) {
       queryParams.set("pageSize", pageSize.toString());
     }
+
+    const queryString = queryParams.toString();
     
-    const url = `${this.baseUrl}/treatments${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+    const url = `${this.baseUrl}/treatments${queryString ? `?${queryString}` : ""}`;
     
     try {
       const response = await fetch(url, {
@@ -85,6 +87,32 @@ class TreatmentService {
         error instanceof Error 
           ? `Failed to add treatment: ${error.message}`
           : "Failed to add treatment"
+      );
+    }
+  }
+
+  async updateTreatmentStatus(status: TreatmentStatus, treatmentId: number): Promise<Treatment> {
+    try {
+      const response = await fetch(`${this.baseUrl}/treatments/${treatmentId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json() as Treatment;
+      return data;
+    } catch (error) {
+      console.error("Error updating treatment status:", error);
+      throw new Error(
+        error instanceof Error 
+          ? `Failed to update treatment status: ${error.message}`
+          : "Failed to update treatment status"
       );
     }
   }
