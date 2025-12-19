@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { GET_TREATMENTS, TREATMENTS, UPDATE_TREATMENT_STATUS } from "@/lib/constants/queryKeys";
+import { GET_TREATMENTS, TREATMENTS, UPDATE_TREATMENT_STATUS } from "@/lib/constants/queryConstants";
 import { treatmentService } from "@/lib/services/TreatmentService";
 import { TreatmentStatus, Treatment } from "@/lib/types";
 import { GetTreatmentsResponse } from "@/lib/services/TreatmentService.types";

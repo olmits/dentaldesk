@@ -3,7 +3,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { FilterProvider } from "@/context/FilterProvider";
 import { PaginationProvider } from "@/context/PaginationProvider";
 import { SearchProvider } from "@/context/SearchProvider";
-import { GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryKeys";
+import { GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryConstants";
 import { treatmentService } from "@/lib/services/TreatmentService";
 
 import TreatmentPageClient from "./_components/TreatmentPageClient";

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ADD_TREATMENT, GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryKeys";
+import { ADD_TREATMENT, GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryConstants";
 import { treatmentService } from "@/lib/services/TreatmentService";
 import { AddTreatmentParams } from "@/lib/services/TreatmentService.types";
 import { toast } from "sonner";

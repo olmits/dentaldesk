@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+
+import { usePaginationStateAction } from "@/hooks/usePaginationStateAction";
+import { BREAKPOINTS } from "@/lib/constants/breakpoints";
+
 import AddTreatment from "./AddTreatment/AddTreatment";
 import TreatmentsSearch from "./TreatmentsSearch";
 import TreatmentsFilter from "./TreatmentsFilter";
@@ -9,6 +14,31 @@ import TreatmentPagination from "./TreatmentsPagination";
 
 
 export default function TreatmentsPageClient() {
+  const { setPageSize } = usePaginationStateAction();
+
+  useEffect(() => {
+    const updatePageSize = () => {
+      const width = window.innerWidth;
+      
+      let newPageSize: number;
+      if (width >= BREAKPOINTS.xl) {
+        newPageSize = 9;
+      } else if (width >= BREAKPOINTS.md) {
+        newPageSize = 8;
+      } else {
+        newPageSize = 6;
+      }
+      
+      setPageSize(newPageSize);
+    };
+
+    updatePageSize();
+
+    window.addEventListener("resize", updatePageSize);
+    
+    return () => window.removeEventListener("resize", updatePageSize);
+  }, [setPageSize]);
+
   return (
     <>
       <section className="flex flex-col gap-4 rounded-lg border bg-card/40 p-4">

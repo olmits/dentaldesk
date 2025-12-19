@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryKeys";
+import { FAILURE_COUNT_THRESHOLD, GET_TREATMENTS, TREATMENTS } from "@/lib/constants/queryConstants";
 import { treatmentService } from "@/lib/services/TreatmentService";
 import { useSearchStateContext } from "@/context/SearchProvider";
 import { useFilterStateContext } from "@/context/FilterProvider";
@@ -18,7 +18,7 @@ const useGetTreatmentsQuery = () => {
     queryKey: [TREATMENTS, GET_TREATMENTS, queryKey],
     queryFn: ({ signal }) => treatmentService.getTreatments({ search, status, page, pageSize }, signal),
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-    retry: 3,
+    retry: FAILURE_COUNT_THRESHOLD,
   });
 };
 
