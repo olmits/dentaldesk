@@ -2,7 +2,7 @@
 
 ## 1. Component Architecture & Decomposition
 
-![Treatment page decomposition](image.png)
+![Treatment page decomposition](tretment-page-decomposition.png)
 
 The main treatment page has been decomposed into smaller, focused sub-components:
 
